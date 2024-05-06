@@ -1,0 +1,64 @@
+
+USER FUNCTIONS
+
+Account Management:
+
+javascript
+Copy code
+router.get('/admin', permission, admin)
+router.post('/newAccount', newAccount)
+router.put('/update/:id', update)
+router.delete('/delete/:id', remove)
+Publication Management:
+
+javascript
+Copy code
+// Get publications
+router.get('/publications', getPublication)
+// Filter publications by category
+router.get('/publications/categories/:categoryId', filterCategory)
+// Filter publications by title
+router.get('/publications/title/:name', filterTitle)
+// Create publication route
+router.post('/publications', createPublication)
+// Update publication route
+router.put('/publications/:id', updatePublication)
+// Delete publication route
+router.delete('/publications/:id', deletePublication)
+Comment Management:
+
+javascript
+Copy code
+// Create comment on publication
+router.post('/publications/comment', createComment)
+// Update comment, provide comment ID
+router.put('/comment/:id', updateComment)
+// Delete comment, provide comment ID
+router.delete('/comment/:id', deleteComment)
+// Comments are only visible through the publication they belong to
+router.get('/publications/:id/comments', getCommentsForPost)
+ADMINISTRATOR FUNCTIONS
+
+Category Management:
+
+javascript
+Copy code
+// The administrator has full access to create, read, update, and delete categories (CRUD).
+router.get('/categories', permission, indexCategory)
+router.post('/categories/create', permission, createCategory)
+router.put('/categories/update/:id', permission, updateCategory)
+router.delete('/categories/:id', permission, deleteCategory)
+Access Routes for Admin:
+
+javascript
+Copy code
+// Route to view categories, access granted with ID: 1 indicating admin
+router.get('/categories', permission, indexCategory)
+// Route to create categories, access granted with ID: 1 indicating admin + provide category name
+router.post('/categories/create', permission, createCategory)
+// Route to update categories, access granted with ID: 1 indicating admin + provide category name
+router.put('/categories/update/:id', permission, updateCategory)
+// Route to delete categories, access granted with ID: 1 indicating admin
+router.delete('/categories/:id', permission, deleteCategory)
+// Route to delete publications by categories
+router.get('/publications/categories/:id', permission, getPublicationsByCategory)
